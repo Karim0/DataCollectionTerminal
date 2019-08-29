@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingTop="8dp"
+    android:paddingRight="8dp"
+    tools:context=".activities.MainActivity">
+
+    <Button
+        android:id="@+id/btn_acceptance"
+        style="@style/DefaultButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_acceptance"/>
+
+    <Button
+        android:id="@+id/btn_balances"
+        style="@style/DefaultButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_balances"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_returns"-->
+        <!--style="@style/DefaultButtonStyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/btn_returns"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_сhoose_product"-->
+        <!--style="@style/DefaultButtonStyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/btn_сhoose_product"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_moving"-->
+        <!--style="@style/DefaultButtonStyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/btn_moving"/>-->
+
+    <Button
+        android:id="@+id/btn_selection"
+        style="@style/DefaultButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_selection"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_inventory"-->
+        <!--style="@style/DefaultButtonStyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/btn_inventory"/>-->
+
+    <Button
+        android:id="@+id/btn_search"
+        style="@style/DefaultButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_search"/>
+</LinearLayout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ТСД</string>
+    <string name="btn_acceptance">Приемка</string>
+    <string name="btn_balances">Проверка остатков</string>
+    <string name="btn_returns">Приемка возвратов</string>
+    <string name="btn_сhoose_product">Подпитка</string>
+    <string name="btn_moving">Перемещение</string>
+    <string name="btn_selection">Отбор</string>
+    <string name="btn_inventory">Инвентаризация</string>
+    <string name="btn_search">Поиск адресов хранения</string>
+    <string name="sing_in">Sing in</string>
+</resources>
