@@ -1,6 +1,7 @@
 package com.wms.datacollectionterminal.helpers;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Base64;
 
 import com.android.volley.AuthFailureError;
@@ -10,18 +11,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.wms.datacollectionterminal.activities.SearchActivity;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class HttpSender {
 
-    private static String baseURl = "http://192.168.1.5:8081";
+//    private static String baseURl = "http://192.168.43.15:8081";
+
+    private static String name = "settings";
 
     public static void getRequest(Context context, String url, final CallBackHttpSender callBackHttpSender) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
+
+        final SharedPreferences sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
+        String baseURl = sharedPreferences.getString("baseURl", "http://192.168.1.6:8081");
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, baseURl + url,
@@ -41,11 +46,15 @@ public class HttpSender {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
+                String username = sharedPreferences.getString("username", ""),
+                        password = sharedPreferences.getString("password", "");
 
-                String key = "Authorization";
-                String encodedString = Base64.encodeToString(String.format("%s:%s", "Karim", "123").getBytes(), Base64.NO_WRAP);
-                String value = String.format("Basic %s", encodedString);
-                map.put(key, value);
+                if(!username.equals("") && !password.equals("")){
+                    String key = "Authorization";
+                    String encodedString = Base64.encodeToString(String.format("%s:%s", username, password).getBytes(), Base64.NO_WRAP);
+                    String value = String.format("Basic %s", encodedString);
+                    map.put(key, value);
+                }
                 return map;
             }
         };
@@ -59,6 +68,9 @@ public class HttpSender {
                                    final Map<String, String> params) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
+
+        final SharedPreferences sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
+        String baseURl = sharedPreferences.getString("baseURl", "http://192.168.1.6:8081");
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, baseURl + url,
@@ -84,11 +96,15 @@ public class HttpSender {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
+                String username = sharedPreferences.getString("username", ""),
+                        password = sharedPreferences.getString("password", "");
 
-                String key = "Authorization";
-                String encodedString = Base64.encodeToString(String.format("%s:%s", "Karim", "123").getBytes(), Base64.NO_WRAP);
-                String value = String.format("Basic %s", encodedString);
-                map.put(key, value);
+                if(!username.equals("") && !password.equals("")){
+                    String key = "Authorization";
+                    String encodedString = Base64.encodeToString(String.format("%s:%s", username, password).getBytes(), Base64.NO_WRAP);
+                    String value = String.format("Basic %s", encodedString);
+                    map.put(key, value);
+                }
                 return map;
             }
         };

@@ -38,12 +38,12 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:text="@string/btn_сhoose_product"/>-->
 
-    <!--<Button-->
-        <!--android:id="@+id/btn_moving"-->
-        <!--style="@style/DefaultButtonStyle"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/btn_moving"/>-->
+    <Button
+        android:id="@+id/btn_moving"
+        style="@style/DefaultButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_moving"/>
 
     <Button
         android:id="@+id/btn_selection"

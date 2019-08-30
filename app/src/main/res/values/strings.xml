@@ -9,4 +9,9 @@
     <string name="btn_inventory">Инвентаризация</string>
     <string name="btn_search">Поиск адресов хранения</string>
     <string name="sing_in">Sing in</string>
+    <string name="settings">Settings</string>
+    <string name="log_out">Log out</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="take_products">Take products</string>
 </resources>

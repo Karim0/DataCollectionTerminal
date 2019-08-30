@@ -96,15 +96,14 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/ac_infoBorder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="12pt" />
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
