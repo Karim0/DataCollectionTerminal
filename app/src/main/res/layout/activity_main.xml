@@ -60,9 +60,16 @@
         <!--android:text="@string/btn_inventory"/>-->
 
     <Button
+        android:id="@+id/btn_product"
+        style="@style/DefaultButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_product" />
+
+    <Button
         android:id="@+id/btn_search"
         style="@style/DefaultButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_search"/>
+        android:text="@string/btn_search" />
 </LinearLayout>

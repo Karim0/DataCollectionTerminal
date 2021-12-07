@@ -1,5 +1,10 @@
 package com.wms.datacollectionterminal.entities;
 
+import android.util.Log;
+
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ProductEntity {
@@ -11,6 +16,9 @@ public class ProductEntity {
     private double weight;
     private Date date;
     private double price;
+    private int countOnWarehouse;
+    private String
+            barCode;
 
     public ProductEntity() {
     }
@@ -27,6 +35,22 @@ public class ProductEntity {
         this.weight = weight;
         this.date = date;
         this.price = price;
+    }
+
+    public ProductEntity(JSONObject json){
+        try {
+            this.id = json.getLong("id");
+            this.productName = json.getString("product_name");
+            this.width = json.getInt("width");
+            this.height = json.getInt("height");
+            this.length = json.getInt("length");
+            this.weight = json.getInt("weight");
+            this.price = json.getInt("price");
+            this.countOnWarehouse = json.getInt("count_on_warehouse");
+            this.barCode = json.getString("bar_code");
+        }catch (Exception e){
+            Log.e("test", e.getMessage());
+        }
     }
 
     public Long getId() {
@@ -91,5 +115,21 @@ public class ProductEntity {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getCountOnWarehouse() {
+        return countOnWarehouse;
+    }
+
+    public void setCountOnWarehouse(int countOnWarehouse) {
+        this.countOnWarehouse = countOnWarehouse;
+    }
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
     }
 }

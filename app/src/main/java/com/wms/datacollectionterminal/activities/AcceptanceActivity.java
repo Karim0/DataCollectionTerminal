@@ -1,8 +1,6 @@
 package com.wms.datacollectionterminal.activities;
 
 import android.os.Bundle;
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -13,11 +11,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.ContentLoadingProgressBar;
+
 import com.android.volley.VolleyError;
-import com.wms.datacollectionterminal.dialogs.ScanBarcodeDialog;
-import com.wms.datacollectionterminal.dialogs.BarcodeScanResult;
-import com.wms.datacollectionterminal.helpers.CallBackHttpSender;
 import com.wms.datacollectionterminal.R;
+import com.wms.datacollectionterminal.dialogs.BarcodeScanResult;
+import com.wms.datacollectionterminal.dialogs.ScanBarcodeDialog;
+import com.wms.datacollectionterminal.helpers.CallBackHttpSender;
 import com.wms.datacollectionterminal.helpers.HttpSender;
 
 import org.json.JSONException;

@@ -3,6 +3,7 @@ package com.wms.datacollectionterminal.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,7 +18,7 @@ import java.util.Map;
 
 public class HttpSender {
 
-//    private static String baseURl = "http://192.168.43.15:8081";
+    private static String baseURl = "http://23.111.206.237:8090";
 
     private static String name = "settings";
 
@@ -26,7 +27,6 @@ public class HttpSender {
         RequestQueue queue = Volley.newRequestQueue(context);
 
         final SharedPreferences sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
-        String baseURl = sharedPreferences.getString("baseURl", "http://192.168.1.6:8081");
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, baseURl + url,
@@ -70,20 +70,20 @@ public class HttpSender {
         RequestQueue queue = Volley.newRequestQueue(context);
 
         final SharedPreferences sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
-        String baseURl = sharedPreferences.getString("baseURl", "http://192.168.1.6:8081");
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, baseURl + url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
+                        Log.i("test", response);
                         callBackHttpSender.responseResult(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // error
+                Log.i("test", error.getMessage());
                 callBackHttpSender.error(error);
             }
         }

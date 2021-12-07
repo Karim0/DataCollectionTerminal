@@ -1,7 +1,8 @@
 package com.wms.datacollectionterminal.activities;
 
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.ContentLoadingProgressBar;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;

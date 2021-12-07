@@ -3,7 +3,7 @@ package com.wms.datacollectionterminal.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -68,6 +68,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
                     @Override
                     public void error(VolleyError e) {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                        sing_in.setEnabled(true);
 
                     }
                 }, params);
