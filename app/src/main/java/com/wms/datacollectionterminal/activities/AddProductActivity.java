@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,9 @@ import com.wms.datacollectionterminal.R;
 import com.wms.datacollectionterminal.helpers.CallBackHttpSender;
 import com.wms.datacollectionterminal.helpers.HttpSender;
 
+import org.json.JSONObject;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,81 +86,118 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void save() {
+
+
         if (isUpdate) {
-            Map<String, String> param = new HashMap<>();
+            JSONObject json = new JSONObject();
 
-            param.put("date", "2021-12-07T16:09:24.319+0000");
-            param.put("count_on_warehouse", "0");
-            param.put("count_on_shipping", "0");
-            param.put("count_expected", "0");
-            param.put("unit", "thing");
-            param.put("type_product", "fragile");
-            param.put("bar_code", productBarCode.getText().toString());
-            param.put("length", productLength.getText().toString());
-            param.put("weight", productWeight.getText().toString());
-            param.put("width", productWidth.getText().toString());
-            param.put("height", productHeight.getText().toString());
-            param.put("price", productPrice.getText().toString());
-            param.put("id", id.toString());
+            try {
+                json.put("date", "2021-12-07T16:09:24.319+0000");
+                json.put("count_on_warehouse", "0");
+                json.put("count_on_shipping", "0");
+                json.put("count_expected", "0");
+                json.put("unit", "thing");
+                json.put("type_product", "fragile");
+                json.put("product_name", productName.getText().toString());
+                json.put("bar_code", productBarCode.getText().toString());
+                json.put("length", productLength.getText().toString());
+                json.put("weight", productWeight.getText().toString());
+                json.put("width", productWidth.getText().toString());
+                json.put("height", productHeight.getText().toString());
+                json.put("price", productPrice.getText().toString());
+                json.put("id", id.toString());
+            } catch (Exception e) {
+                Log.e("test", e.getMessage());
+            }
 
-            HttpSender.postRequest(this, "/product/add", new CallBackHttpSender() {
+            Log.i("test", "JSON = " + json.toString());
+
+            HttpSender.postRequest(this, "/product/updateById", new CallBackHttpSender() {
                 @Override
                 public void responseResult(String s) {
+                    Log.i("test", "Save product: " + s);
+//                    setResult(Activity.RESULT_OK, new Intent());
+                    finish();
+                }
 
-                    setResult(Activity.RESULT_OK, new Intent());
+                @Override
+                public void responseResult(JSONObject json) {
+                    Log.i("test", "Save product: " + json);
+                    finish();
                 }
 
                 @Override
                 public void error(VolleyError e) {
-
+                    Log.e("test", "Save product: " + e.getMessage());
+                    finish();
                 }
-            }, param);
+            }, Collections.emptyMap(), json);
 
         } else {
-            Map<String, String> param = new HashMap<>();
+            JSONObject json = new JSONObject();
 
-            param.put("date", "2021-12-07T16:09:24.319+0000");
-            param.put("count_on_warehouse", "0");
-            param.put("count_on_shipping", "0");
-            param.put("count_expected", "0");
-            param.put("unit", "thing");
-            param.put("type_product", "fragile");
-            param.put("bar_code", productBarCode.getText().toString());
-            param.put("length", productLength.getText().toString());
-            param.put("weight", productWeight.getText().toString());
-            param.put("width", productWidth.getText().toString());
-            param.put("height", productHeight.getText().toString());
-            param.put("price", productPrice.getText().toString());
-            param.put("id", id.toString());
+            try {
+                json.put("date", "2021-12-07T16:09:24.319+0000");
+                json.put("count_on_warehouse", "0");
+                json.put("count_on_shipping", "0");
+                json.put("count_expected", "0");
+                json.put("unit", "thing");
+                json.put("type_product", "fragile");
+                json.put("product_name", productName.getText().toString());
+                json.put("bar_code", productBarCode.getText().toString());
+                json.put("length", productLength.getText().toString());
+                json.put("weight", productWeight.getText().toString());
+                json.put("width", productWidth.getText().toString());
+                json.put("height", productHeight.getText().toString());
+                json.put("price", productPrice.getText().toString());
+            } catch (Exception e) {
+                Log.e("test", e.getMessage());
+            }
+
+            Log.i("test", "JSON = " + json.toString());
 
             HttpSender.postRequest(this, "/product/add", new CallBackHttpSender() {
                 @Override
                 public void responseResult(String s) {
+                    Log.i("test", "Save product: " + s);
+//                    setResult(Activity.RESULT_OK, new Intent());
+                    finish();
+                }
 
-                    setResult(Activity.RESULT_OK, new Intent());
+                @Override
+                public void responseResult(JSONObject json) {
+                    Log.i("test", "Save product: " + json);
+                    finish();
                 }
 
                 @Override
                 public void error(VolleyError e) {
-
+                    Log.e("test", "Save product: " + e.getMessage());
+                    finish();
                 }
-            }, param);
+            }, Collections.emptyMap(), json);
         }
     }
 
     private void delete() {
-        Map<String, String> param = new HashMap<>();
-
-        HttpSender.postRequest(this, "/product/add", new CallBackHttpSender() {
+        HttpSender.deleteRequest(this, "/product/deleteById?id=" + id.toString(), new CallBackHttpSender() {
             @Override
             public void responseResult(String s) {
+                Log.i("test", "delete product: " + s);
+                finish();
+            }
 
+            @Override
+            public void responseResult(JSONObject json) {
+                Log.i("test", "delete product: " + json);
+                finish();
             }
 
             @Override
             public void error(VolleyError e) {
-
+                Log.e("test", "delete product: " + e.getMessage());
+                finish();
             }
-        }, param);
+        }, Collections.singletonMap("id", id.toString()));
     }
 }

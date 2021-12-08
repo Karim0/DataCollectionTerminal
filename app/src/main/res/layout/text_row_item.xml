@@ -20,7 +20,7 @@
             <TextView
                 android:id="@+id/list_product_name"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="1" />
         </LinearLayout>
 
@@ -32,7 +32,7 @@
             <TextView
                 android:id="@+id/list_product_size"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="1" />
         </LinearLayout>
 
@@ -44,7 +44,7 @@
             <TextView
                 android:id="@+id/list_product_price"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="1" />
         </LinearLayout>
     </LinearLayout>

@@ -3,10 +3,12 @@ package com.wms.datacollectionterminal.activities;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,9 +28,10 @@ import org.json.JSONObject;
 
 import java.util.Collections;
 
-public class ProductsActivity extends AppCompatActivity {
+public class ProductsActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
     private CustomAdapter customAdapter;
+    private Button addProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,9 @@ public class ProductsActivity extends AppCompatActivity {
         customAdapter = new CustomAdapter();
 
         this.recyclerView = findViewById(R.id.recyclerView);
+        this.addProduct = findViewById(R.id.btn_product_add);
+        this.addProduct.setOnClickListener(this);
+
         this.recyclerView.setAdapter(customAdapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -65,13 +71,18 @@ public class ProductsActivity extends AppCompatActivity {
                     }
                 })
         );
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         loadProduct();
     }
 
-
     private void loadProduct() {
-
+        customAdapter.clear();
+        Log.i("test", "Load product list");
         HttpSender.postRequest(this, "/product/all", new CallBackHttpSender() {
             @Override
             public void responseResult(String s) {
@@ -92,5 +103,16 @@ public class ProductsActivity extends AppCompatActivity {
 
             }
         }, Collections.emptyMap());
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_product_add:
+                Intent i = new Intent(ProductsActivity.this, AddProductActivity.class);
+                startActivity(i);
+                break;
+        }
     }
 }

@@ -6,15 +6,21 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class HttpSender {
 
@@ -49,7 +55,7 @@ public class HttpSender {
                 String username = sharedPreferences.getString("username", ""),
                         password = sharedPreferences.getString("password", "");
 
-                if(!username.equals("") && !password.equals("")){
+                if (!username.equals("") && !password.equals("")) {
                     String key = "Authorization";
                     String encodedString = Base64.encodeToString(String.format("%s:%s", username, password).getBytes(), Base64.NO_WRAP);
                     String value = String.format("Basic %s", encodedString);
@@ -66,12 +72,11 @@ public class HttpSender {
     public static void postRequest(Context context, String url,
                                    final CallBackHttpSender callBackHttpSender,
                                    final Map<String, String> params) {
-        // Instantiate the RequestQueue.
+
         RequestQueue queue = Volley.newRequestQueue(context);
 
         final SharedPreferences sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
 
-        // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, baseURl + url,
                 new Response.Listener<String>() {
                     @Override
@@ -82,8 +87,6 @@ public class HttpSender {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // error
-                Log.i("test", error.getMessage());
                 callBackHttpSender.error(error);
             }
         }
@@ -99,7 +102,7 @@ public class HttpSender {
                 String username = sharedPreferences.getString("username", ""),
                         password = sharedPreferences.getString("password", "");
 
-                if(!username.equals("") && !password.equals("")){
+                if (!username.equals("") && !password.equals("")) {
                     String key = "Authorization";
                     String encodedString = Base64.encodeToString(String.format("%s:%s", username, password).getBytes(), Base64.NO_WRAP);
                     String value = String.format("Basic %s", encodedString);
@@ -111,6 +114,82 @@ public class HttpSender {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+    public static void postRequest(Context context, String url,
+                                   final CallBackHttpSender callBackHttpSender,
+                                   final Map<String, String> params,
+                                   final JSONObject body) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        final SharedPreferences sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
+
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, baseURl + url, body,
+                callBackHttpSender::responseResult,
+                callBackHttpSender::error
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> map = new HashMap<String, String>();
+                String username = sharedPreferences.getString("username", ""),
+                        password = sharedPreferences.getString("password", "");
+
+                if (!username.equals("") && !password.equals("")) {
+                    String key = "Authorization";
+                    String encodedString = Base64.encodeToString(String.format("%s:%s", username, password).getBytes(), Base64.NO_WRAP);
+                    String value = String.format("Basic %s", encodedString);
+                    map.put(key, value);
+                }
+                return map;
+            }
+        };
+
+        queue.add(stringRequest);
+    }
+
+    public static void deleteRequest(Context context, String url,
+                                     final CallBackHttpSender callBackHttpSender,
+                                     final Map<String, String> params) {
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        final SharedPreferences sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, baseURl + url,
+                response -> {
+                    Log.i("test", response);
+                    callBackHttpSender.responseResult(response);
+                }, callBackHttpSender::error
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                String username = sharedPreferences.getString("username", ""),
+                        password = sharedPreferences.getString("password", "");
+
+                if (!username.equals("") && !password.equals("")) {
+                    String key = "Authorization";
+                    String encodedString = Base64.encodeToString(String.format("%s:%s", username, password).getBytes(), Base64.NO_WRAP);
+                    String value = String.format("Basic %s", encodedString);
+                    map.put(key, value);
+                }
+                return map;
+            }
+        };
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
     }
 
 }

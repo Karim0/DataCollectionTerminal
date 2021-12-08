@@ -85,6 +85,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         notifyItemInserted(data.size() - 1);
     }
 
+    public void clear(){
+        data.clear();
+        notifyDataSetChanged();
+    }
+
     public interface ClickItem{
         void click(ProductEntity productEntity);
     }

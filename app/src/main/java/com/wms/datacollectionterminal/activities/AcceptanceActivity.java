@@ -210,6 +210,11 @@ public class AcceptanceActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    public void responseResult(JSONObject json) {
+
+    }
+
+    @Override
     public void error(VolleyError e) {
         infoBorder.setText(e.toString());
     }
