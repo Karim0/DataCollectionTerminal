@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <android.support.v4.widget.ContentLoadingProgressBar
+        <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/ac_pr_product"
             android:layout_width="20dp"
             android:layout_height="20dp"

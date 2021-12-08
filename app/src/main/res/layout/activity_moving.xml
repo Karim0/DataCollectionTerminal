@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="" />
 
-        <android.support.v4.widget.ContentLoadingProgressBar
+        <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/mv_pr_pallet"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="20dp"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:text="" />
 
-        <android.support.v4.widget.ContentLoadingProgressBar
+        <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/mv_pr_cell"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="20dp"
